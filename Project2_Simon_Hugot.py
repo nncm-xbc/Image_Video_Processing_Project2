@@ -6,7 +6,6 @@ from matplotlib import pyplot as plt
 """
 ------Question 1-----------
 """
-
 # import the image from the image folder
 img = cv2.imread("images/trust.jpg")
 
