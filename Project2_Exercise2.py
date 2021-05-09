@@ -31,6 +31,8 @@ Since we want salt and pepper noise,
 we chose random pixel in the image and color them white,
 same goes for black pixels. 
 """
+
+
 def random_noise(img):
     # get the dimensions of the inputted image
     w, h = img.shape[:2]
