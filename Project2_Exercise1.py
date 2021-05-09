@@ -20,20 +20,6 @@ shift2 = np.fft.fftshift(fourier2)
 frequencyImg1 = np.log(np.abs(shift1))
 frequencyImg2 = np.log(np.abs(shift2))
 
-"""-------plot----------"""
-plt.subplot(121), plt.imshow(original1grey, cmap='gray')
-plt.title('Kitten image'), plt.xticks([]), plt.yticks([])
-plt.subplot(122), plt.imshow(frequencyImg1, cmap='gray')
-plt.title('Frequency image'), plt.xticks([]), plt.yticks([])
-plt.show()
-
-plt.subplot(121), plt.imshow(original2grey, cmap='gray')
-plt.title('Puppy image'), plt.xticks([]), plt.yticks([])
-plt.subplot(122), plt.imshow(frequencyImg2, cmap='gray')
-plt.title('Frequency image'), plt.xticks([]), plt.yticks([])
-plt.show()
-"""-------plot----------"""
-
 # function that applies a low-pass filter to a given image
 def low_pass_filter(img):
     rows, cols = img.shape
@@ -87,14 +73,6 @@ highpassfilt = high_pass_filter(shift2)
 lowpass_img = lowpassfilt * shift1
 highpass_img = highpassfilt * shift2
 
-"""-------plot----------"""
-plt.subplot(121), plt.imshow(np.log(1+np.abs(lowpass_img)), cmap='gray')
-plt.title('low-pass'), plt.xticks([]), plt.yticks([])
-plt.subplot(122), plt.imshow(np.log(1+np.abs(highpass_img)), cmap='gray')
-plt.title('high-pass'), plt.xticks([]), plt.yticks([])
-plt.show()
-"""-------plot----------"""
-
 # addition in the frequency domain
 frequencyadd = lowpassfilt + highpassfilt
 inverseshift = np.fft.ifftshift(frequencyadd)
@@ -113,10 +91,42 @@ def mse(img1, img2):
 error_val = mse(inversefourier, spatialadd)
 print("Mean Squared Error :", error_val)
 
-"""-------plot----------"""
+"""-------plot1----------"""
+plt.subplot(121), plt.imshow(original1grey, cmap='gray')
+plt.title('Kitten image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122), plt.imshow(frequencyImg1, cmap='gray')
+plt.title('Frequency image'), plt.xticks([]), plt.yticks([])
+plt.show()
+
+plt.subplot(121), plt.imshow(original2grey, cmap='gray')
+plt.title('Puppy image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122), plt.imshow(frequencyImg2, cmap='gray')
+plt.title('Frequency image'), plt.xticks([]), plt.yticks([])
+plt.show()
+"""-------plot1----------"""
+
+"""-------plot2----------"""
+plt.subplot(121), plt.imshow(np.log(1+np.abs(lowpass_img)), cmap='gray')
+plt.title('low-pass'), plt.xticks([]), plt.yticks([])
+plt.subplot(122), plt.imshow(np.log(1+np.abs(highpass_img)), cmap='gray')
+plt.title('high-pass'), plt.xticks([]), plt.yticks([])
+plt.show()
+"""-------plot2----------"""
+
+"""-------plot3----------"""
 plt.subplot(121), plt.imshow(np.log(1+np.abs(inversefourier)), cmap='gray')
 plt.title('frequency addition'), plt.xticks([]), plt.yticks([])
 plt.subplot(122), plt.imshow(np.log(1+np.abs(spatialadd)), cmap='gray')
 plt.title('spatial addition'), plt.xticks([]), plt.yticks([])
 plt.show()
-"""-------plot----------"""
+"""-------plot3----------"""
+
+"""-------plot4----------"""
+plt.subplot(131), plt.plot(fourier1[:, 0], fourier1[:, 1], "r")
+plt.title('plot 1'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.plot(fourier2[:, 0], fourier2[:, 1], "g")
+plt.title('plot 2'), plt.xticks([]), plt.yticks([])
+plt.subplot(133), plt.plot(frequencyadd[:, 0], frequencyadd[:, 1], "b")
+plt.title('plot 3'), plt.xticks([]), plt.yticks([])
+plt.show()
+"""-------plot4----------"""
