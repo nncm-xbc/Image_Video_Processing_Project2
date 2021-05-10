@@ -121,12 +121,49 @@ plt.title('spatial addition'), plt.xticks([]), plt.yticks([])
 plt.show()
 """-------plot3----------"""
 
+
 """-------plot4----------"""
-plt.subplot(131), plt.plot(fourier1[:, 0], fourier1[:, 1], "r")
-plt.title('plot 1'), plt.xticks([]), plt.yticks([])
-plt.subplot(132), plt.plot(fourier2[:, 0], fourier2[:, 1], "g")
-plt.title('plot 2'), plt.xticks([]), plt.yticks([])
-plt.subplot(133), plt.plot(frequencyadd[:, 0], frequencyadd[:, 1], "b")
-plt.title('plot 3'), plt.xticks([]), plt.yticks([])
-plt.show()
+shifted_fft2 = np.fft.fftshift(fourier1)
+rows, cols = shifted_fft2.shape[:2]
+fig1, x = plt.subplots(nrows=1, ncols=1)
+
+nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
+x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+
+x.set_title('Double Sided FFT')
+x.set_xlabel('Sample points (N-point DFT)')
+x.set_ylabel('DFT Values')
+x.set_xlim(-50, 50)
+x.set_xticks(np.arange(-50, 50+10, 10))
+fig1.show()
+
+
+shifted_fft2 = np.fft.fftshift(fourier2)
+rows, cols = shifted_fft2.shape[:2]
+fig2, x = plt.subplots(nrows=1, ncols=1)
+
+nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
+x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+
+x.set_title('Double Sided FFT')
+x.set_xlabel('Sample points (N-point DFT)')
+x.set_ylabel('DFT Values')
+x.set_xlim(-50, 50)
+x.set_xticks(np.arange(-50, 50+10, 10))
+fig2.show()
+
+
+shifted_fft2 = np.fft.fftshift(frequencyadd)
+rows, cols = shifted_fft2.shape[:2]
+fig3, x = plt.subplots(nrows=1, ncols=1)
+
+nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
+x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+
+x.set_title('Double Sided FFT')
+x.set_xlabel('Sample points (N-point DFT)')
+x.set_ylabel('DFT Values')
+x.set_xlim(-50, 50)
+x.set_xticks(np.arange(-50, 50+10, 10))
+fig3.show()
 """-------plot4----------"""

@@ -14,13 +14,48 @@ translation_matrix = np.float32([[1, 0, 200], [0, 1, 0]])
 # apply the translation matrix to the image
 translated_image = cv2.warpAffine(image, translation_matrix, (w, h))
 
-# 2D FFT of the translated image
-fft = np.fft.fft2(translated_image)
+# 2D FFT of the original image
+fft1 = np.fft.fft2(image)
 
-plt.subplot(131), plt.imshow(image, cmap='gray')
+# 2D FFT of the translated image
+fft2 = np.fft.fft2(translated_image)
+
+plt.subplot(141), plt.imshow(image, cmap='gray')
 plt.title('original image'), plt.xticks([]), plt.yticks([])
-plt.subplot(132), plt.imshow(translated_image, cmap='gray')
+plt.subplot(142), plt.imshow(translated_image, cmap='gray')
 plt.title('translated image'), plt.xticks([]), plt.yticks([])
-plt.subplot(133), plt.plot(fft[:, 0], fft[:, 1], "b")
-plt.title('magnitude 2d fft'), plt.xticks([]), plt.yticks([])
+plt.subplot(143), plt.imshow(np.log(1+np.abs(fft1)), cmap='gray')
+plt.title('fft image'), plt.xticks([]), plt.yticks([])
+plt.subplot(144), plt.imshow(np.log(1+np.abs(fft2)), cmap='gray')
+plt.title('translated fft image'), plt.xticks([]), plt.yticks([])
 plt.show()
+
+
+shifted_fft = np.fft.fftshift(fft1)
+rows, cols = shifted_fft.shape[:2]
+fig1, x = plt.subplots(nrows=1, ncols=1)
+
+nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
+x.plot(nVals, np.abs(shifted_fft[:, 1]))
+
+x.set_title('Double Sided FFT')
+x.set_xlabel('Sample points (N-point DFT)')
+x.set_ylabel('DFT Values')
+x.set_xlim(-50, 50)
+x.set_xticks(np.arange(-50, 50+10, 10))
+fig1.show()
+
+
+shifted_fft2 = np.fft.fftshift(fft2)
+rows, cols = shifted_fft2.shape[:2]
+fig2, x = plt.subplots(nrows=1, ncols=1)
+
+nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
+x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+
+x.set_title('Double Sided FFT')
+x.set_xlabel('Sample points (N-point DFT)')
+x.set_ylabel('DFT Values')
+x.set_xlim(-50, 50)
+x.set_xticks(np.arange(-50, 50+10, 10))
+fig2.show()
