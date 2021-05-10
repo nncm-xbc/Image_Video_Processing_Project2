@@ -30,7 +30,7 @@ def Filter(img):
     return mask
 
 
-# call the filter on the centered frequency image and apply it to the frequency domain image
+# call the filter on the centered frequency image and apply it to the frequency domain image.
 uncentered_mask = Filter(centered)
 mask = np.fft.fftshift(uncentered_mask)
 proceced_img_ft = mask * centered
