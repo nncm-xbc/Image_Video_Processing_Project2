@@ -1,7 +1,5 @@
 import cv2
 import random
-import math
-from matplotlib import pyplot as plt
 
 """
 ------Question 1-----------
