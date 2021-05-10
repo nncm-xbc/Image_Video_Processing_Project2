@@ -15,13 +15,15 @@ centered_plot = np.log(1+np.abs(centered))
 def Filter(img):
 
     rows, cols = img.shape
-    mask = img
+    mask = img.copy()
+
+    j, x, y = 0.001, 10, 10
 
     # for all frequency values compute the value of the filter
     for r in range(rows):
         for c in range(cols):
 
-            h = math.exp(-(1*r*2))*math.exp(-(1*c*2))
+            h = math.exp(-(j*r*x))*math.exp(-(j*c*y))
             mask[r, c] = h
 
     # return the final mask
@@ -31,7 +33,9 @@ def Filter(img):
 # call the filter on the centered frequency image and apply it to the frequency domain image
 uncentered_mask = Filter(centered)
 mask = np.fft.fftshift(uncentered_mask)
-proceced_img = mask * centered
+proceced_img_ft = mask * centered
+
+final_img = np.fft.ifft2(np.fft.ifftshift(proceced_img_ft))
 
 
 plt.subplot(131), plt.imshow(img, cmap='gray')
@@ -42,10 +46,12 @@ plt.subplot(133), plt.imshow(centered_plot, cmap='gray')
 plt.title('centered ft image'), plt.xticks([]), plt.yticks([])
 plt.show()
 
-plt.subplot(131), plt.imshow(np.log(1+np.abs(uncentered_mask)), cmap='gray')
+plt.subplot(141), plt.imshow(np.log(1+np.abs(uncentered_mask)), cmap='gray')
 plt.title('uncentered mask'), plt.xticks([]), plt.yticks([])
-plt.subplot(132), plt.imshow(np.log(1+np.abs(mask)), cmap='gray')
+plt.subplot(142), plt.imshow(np.log(1+np.abs(mask)), cmap='gray')
 plt.title('mask'), plt.xticks([]), plt.yticks([])
-plt.subplot(133), plt.imshow(np.log(1+np.abs(proceced_img)), cmap='gray')
+plt.subplot(143), plt.imshow(np.log(1+np.abs(proceced_img_ft)), cmap='gray')
 plt.title('mask + image'), plt.xticks([]), plt.yticks([])
+plt.subplot(144), plt.imshow(np.abs(final_img), cmap='gray')
+plt.title('final image'), plt.xticks([]), plt.yticks([])
 plt.show()
