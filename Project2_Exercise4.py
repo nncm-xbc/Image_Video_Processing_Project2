@@ -55,3 +55,7 @@ plt.title('mask + image'), plt.xticks([]), plt.yticks([])
 plt.subplot(144), plt.imshow(np.abs(final_img), cmap='gray')
 plt.title('final image'), plt.xticks([]), plt.yticks([])
 plt.show()
+
+plt.subplot(111), plt.imshow(np.abs(final_img), cmap='gray')
+plt.title('final image'), plt.xticks([]), plt.yticks([])
+plt.show()

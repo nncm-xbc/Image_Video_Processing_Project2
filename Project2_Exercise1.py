@@ -123,12 +123,11 @@ plt.show()
 
 
 """-------plot4----------"""
-shifted_fft2 = np.fft.fftshift(fourier1)
-rows, cols = shifted_fft2.shape[:2]
+rows, cols = fourier1.shape[:2]
 fig1, x = plt.subplots(nrows=1, ncols=1)
 
 nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
-x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+x.plot(nVals, np.abs(np.fft.fftshift(fourier1[:, 1])))
 
 x.set_title('Double Sided FFT')
 x.set_xlabel('Sample points (N-point DFT)')
@@ -138,12 +137,11 @@ x.set_xticks(np.arange(-50, 50+10, 10))
 fig1.show()
 
 
-shifted_fft2 = np.fft.fftshift(fourier2)
-rows, cols = shifted_fft2.shape[:2]
+rows, cols = fourier2.shape[:2]
 fig2, x = plt.subplots(nrows=1, ncols=1)
 
 nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
-x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+x.plot(nVals, np.abs(np.fft.fftshift(fourier2[:, 1])))
 
 x.set_title('Double Sided FFT')
 x.set_xlabel('Sample points (N-point DFT)')
@@ -153,12 +151,11 @@ x.set_xticks(np.arange(-50, 50+10, 10))
 fig2.show()
 
 
-shifted_fft2 = np.fft.fftshift(frequencyadd)
-rows, cols = shifted_fft2.shape[:2]
+rows, cols = frequencyadd.shape[:2]
 fig3, x = plt.subplots(nrows=1, ncols=1)
 
 nVals = np.arange(start = -rows/2, stop = rows/2)* 300/rows
-x.plot(nVals, np.abs(shifted_fft2[:, 1]))
+x.plot(nVals, np.abs(np.fft.fftshift(frequencyadd[:, 1])))
 
 x.set_title('Double Sided FFT')
 x.set_xlabel('Sample points (N-point DFT)')
