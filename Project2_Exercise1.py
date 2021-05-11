@@ -121,8 +121,12 @@ plt.title('spatial addition'), plt.xticks([]), plt.yticks([])
 plt.show()
 """-------plot3----------"""
 
+plt.subplot(111), plt.imshow(np.log(1+np.abs(frequencyadd)), cmap='gray')
+plt.title('frequency addition'), plt.xticks([]), plt.yticks([])
 
-"""-------plot4----------"""
+plt.show()
+
+"""
 rows, cols = fourier1.shape[:2]
 fig1, x = plt.subplots(nrows=1, ncols=1)
 
@@ -163,4 +167,4 @@ x.set_ylabel('DFT Values')
 x.set_xlim(-50, 50)
 x.set_xticks(np.arange(-50, 50+10, 10))
 fig3.show()
-"""-------plot4----------"""
+"""

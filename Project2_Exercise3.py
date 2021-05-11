@@ -23,17 +23,20 @@ fft2 = np.fft.fft2(translated_image)
 shiftfft1 = np.fft.fftshift(fft1)
 shiftfft2 = np.fft.fftshift(fft2)
 
-plt.subplot(141), plt.imshow(image, cmap='gray')
+plt.subplot(121), plt.imshow(image, cmap='gray')
 plt.title('original image '), plt.xticks([]), plt.yticks([])
-plt.subplot(142), plt.imshow(translated_image, cmap='gray')
+plt.subplot(122), plt.imshow(translated_image, cmap='gray')
 plt.title('translated image'), plt.xticks([]), plt.yticks([])
-plt.subplot(143), plt.imshow(np.log(1+np.abs(shiftfft1)), cmap='gray')
+plt.show()
+
+plt.subplot(121), plt.imshow(np.log(1+np.abs(shiftfft1)), cmap='gray')
 plt.title('ft image'), plt.xticks([]), plt.yticks([])
-plt.subplot(144), plt.imshow(np.log(1+np.abs(shiftfft2)), cmap='gray')
+plt.subplot(122), plt.imshow(np.log(1+np.abs(shiftfft2)), cmap='gray')
 plt.title('translated ft image'), plt.xticks([]), plt.yticks([])
 plt.show()
 
 
+"""
 rows, cols = fft1.shape[:2]
 fig1, x = plt.subplots(nrows=1, ncols=1)
 
@@ -61,3 +64,4 @@ x.set_ylabel('DFT Values')
 x.set_xlim(-50, 50)
 x.set_xticks(np.arange(-50, 50+10, 10))
 fig2.show()
+"""
